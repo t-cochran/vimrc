@@ -49,9 +49,6 @@ nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 " Map 'jj' to <Esc> in insert mode
 imap jj <Esc>
 
-" Automatically closing braces
-inoremap { {<CR>}<Esc>ko<C-d><Tab>
-
 " [C/Cpp/py] Block comment in visual mode with Ctrl+c
 autocmd FileType c vmap <S-c> :s/^/\/\//<Enter> 
 autocmd FileType cpp vmap <S-c> :s/^/\/\//<Enter>
@@ -120,19 +117,19 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.p
 map <F9> :YcmCompleter FixIt<CR>
 
 "  Set a filetype whitelist for YCM
-let g:ycm_filetype_whitelist = { "c":1, "cpp":1, "sh":1, "python":1, "javascript":1 }
+let g:ycm_filetype_whitelist = { "c":1, "cpp":1, "python":1, "javascript":1,
+                               \ "html":1, "css":1,  "sh":1, "bash":1 }
 
 
 "-- [ALE] ------------------------------------------------------------------
-
-"   Enable ALE code completion
-"  let g:ale_completion_enabled=1
 
 "   Enable ALE linters for certain filetypes
 let g:ale_linters = { 'c':'all', 'cpp':'all', 'javascript':'all' }
 
 "   Enable ALE parsing Makefile
 let g:ale_c_parse_makefile = 1
+let g:ale_cpp_parse_makefile = 1
+
 
 "-- [INDENTLINE] ------------------------------------------------------------
 
