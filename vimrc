@@ -61,41 +61,41 @@ set hlsearch
 " Double escape turns off highlights of previous search
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
-" Map Ctrl+r in visual mode to put replacement text at highhlights
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+" Map Ctrl+r in visual mode to put replacement text at highlights
+vnoremap <C-r> "hy:%s///g<left><left>
 
 " Map <F5> to preview markdown files with chromium markdown preview
 noremap <F5> :!chromium "%"<CR>
 
 "-- [NERDTREE] ----------------------------------------------------------------
 
-"   Run NERDTree when vim starts
+" Run NERDTree when vim starts
 autocmd VimEnter * NERDTree
 
-"   Close NERDTree when vim quits
+" Close NERDTree when vim quits
 autocmd VimLeave * NERDTreeClose
 
-"   Close vim if the only window open is NERDTREE
+" Close vim if the only window open is NERDTREE
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-"   Set default NERDTREE width
+" Set default NERDTREE width
 :let g:NERDTreeWinSize=30
 
-"   Toggle NERDTREE with hotkey [Ctrl+n]
+" Toggle NERDTREE with hotkey [Ctrl+n]
 map <C-n> :NERDTreeToggle<CR>
 
-"   Creating tabs will generate a new NERDTree buffer
+" Creating tabs will generate a new NERDTree buffer
 autocmd BufWinEnter * NERDTreeMirror
 
 "-- [COLOR THEMES] ----------------------------------------------------------
 
-"   Enable 24bit true color
+" Enable 24bit true color
 syntax enable
 if (has("termguicolors"))
       set termguicolors
 endif
 
-"   Nightowl theme
+" Nightowl theme
 colorscheme night-owl
 autocmd VimEnter * highlight Number ctermfg=224 guifg=Orange
 autocmd VimEnter * highlight Constant ctermfg=116 guifg=#7fdbca
@@ -110,34 +110,34 @@ autocmd VimEnter * highlight Repeat ctermfg=176 guifg=#c792ea
 
 "-- [YOUCOMPLETEME] ---------------------------------------------------------
 
-"   Enable support for C like language
+" Enable support for C like language
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py"
 
-"  Map YouCompleteMe FixIt to F9 key
+" Map YouCompleteMe FixIt to F9 key
 map <F9> :YcmCompleter FixIt<CR>
 
-"  Set a filetype whitelist for YCM
+" Set a filetype whitelist for YCM
 let g:ycm_filetype_whitelist = { "c":1, "cpp":1, "python":1, "javascript":1, 
                                 \"html":1, "css":1,  "sh":1, "bash":1 }
 
 "-- [ALE] ------------------------------------------------------------------
 
-"   Enable ALE linters for certain filetypes
+" Enable ALE linters for certain filetypes
 let g:ale_linters = { 'c':'all', 'cpp':'all', 'python':'all', 'javascript':'all',
                      \'html':'all', 'css':'all', 'sh':'all', 'awk':'all' }
 
-"   Enable ALE parsing Makefile
+" Enable ALE parsing Makefile
 let g:ale_c_parse_makefile = 1
 let g:ale_cpp_parse_makefile = 1
 
 "-- [INDENTLINE] ------------------------------------------------------------
 
-"   Change indent character
+" Change indent character
 let g:indentLine_char = '▏'
 
 "-- [VIM-DEVICONS] ----------------------------------------------------------
 
-"  Set encoding to UTF-8 to show glyphs
+" Set encoding to UTF-8 to show glyphs
 set encoding=utf8
 
 " Set vim font to a nerd font
