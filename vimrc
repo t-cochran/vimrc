@@ -1,63 +1,59 @@
 "-- [VIM-PLUG Package Manager] ------------------------------------------------
-
-" :PlugInstall
+" Usage
+" :PlugInstall      - installs plugins
+" :PlugStatus       - check status of plugins
+" :PlugUpdate       - update plugins
 call plug#begin()
 Plug 'preservim/NERDTREE'
+Plug 'arcticicestudio/nord-vim'
 Plug 'haishanh/night-owl.vim'
 Plug 'vim-airline/vim-airline'
 call plug#end()
 
-
 "-- [VUNDLE Package Manager] --------------------------------------------------
-
-" :PluginList       - lists configured plugins
+" Usage
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" :PluginList       - lists configured plugins
+" :PluginUpdate     - update plugins;
 set nocompatible
 filetype off              
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'Yggdroot/indentLine'
 Plugin 'dense-analysis/ale'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
 call vundle#end()
 
-
 "-- [General Settings] -------------------------------------------------------
 
 " Line numbers on/off
 set number
 
+" Insert 4 spaces on pressing tab
+set expandtab
+
 " Show existing tab with 4 spaces width
 set tabstop=4
+
+" Move cursor 4 spaces when typing tab
+set softtabstop=4
 
 " When indenting with '>', use 4 spaces width
 set shiftwidth=4
 
-" On pressing tab, insert 4 spaces
-set expandtab
-
 " Set default vertical splits to the right
 set splitright
 
-" Map <Leader(\)>r to refresh NERDTree anywhere
+" Map <Leader>r to refresh NERDTree anywhere
 nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 
 " Map 'jj' to <Esc> in insert mode
 imap jj <Esc>
-
-" [C/Cpp/py] Block comment in visual mode with Ctrl+c
-autocmd FileType c vmap <S-c> :s/^/\/\//<Enter> 
-autocmd FileType cpp vmap <S-c> :s/^/\/\//<Enter>
-autocmd FileType python vmap <S-c> :s/^/\#<Enter>
-
-" [C/Cpp/py] Block comment in visual mode with Ctrl+x
-autocmd FileType c vmap <S-x> :s/^\/\///<Enter>
-autocmd FileType cpp vmap <S-x> :s/^\/\///<Enter>
-autocmd FileType python vmap <S-x> :s/^#//<Enter>
 
 " Set search highlighting (e.g. normal '/' or visual '*')
 set hlsearch
@@ -68,12 +64,8 @@ nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 " Map Ctrl+r in visual mode to put replacement text at highhlights
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
-" Map <F5> to preview markdown files with chromium
+" Map <F5> to preview markdown files with chromium markdown preview
 noremap <F5> :!chromium "%"<CR>
-
-" Map HOME key to create a terminal in the current file dir
-map <Home> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
-
 
 "-- [NERDTREE] ----------------------------------------------------------------
 
@@ -95,18 +87,26 @@ map <C-n> :NERDTreeToggle<CR>
 "   Creating tabs will generate a new NERDTree buffer
 autocmd BufWinEnter * NERDTreeMirror
 
-
 "-- [COLOR THEMES] ----------------------------------------------------------
 
 "   Enable 24bit true color
+syntax enable
 if (has("termguicolors"))
       set termguicolors
 endif
 
 "   Nightowl theme
-syntax enable
 colorscheme night-owl
+autocmd VimEnter * highlight Number ctermfg=224 guifg=Orange
+autocmd VimEnter * highlight Constant ctermfg=116 guifg=#7fdbca
+autocmd VimEnter * highlight Type ctermfg=176 guifg=#c792ea
+autocmd VimEnter * highlight Boolean ctermfg=176 guifg=#c792ea
+autocmd VimEnter * highlight Function ctermfg=176 guifg=#c792ea
+autocmd VimEnter * highlight Conditional ctermfg=176 guifg=#c792ea
+autocmd VimEnter * highlight Repeat ctermfg=176 guifg=#c792ea
 
+"   Nord theme
+" colorscheme nord
 
 "-- [YOUCOMPLETEME] ---------------------------------------------------------
 
@@ -117,25 +117,23 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.p
 map <F9> :YcmCompleter FixIt<CR>
 
 "  Set a filetype whitelist for YCM
-let g:ycm_filetype_whitelist = { "c":1, "cpp":1, "python":1, "javascript":1,
-                               \ "html":1, "css":1,  "sh":1, "bash":1 }
-
+let g:ycm_filetype_whitelist = { "c":1, "cpp":1, "python":1, "javascript":1, 
+                                \"html":1, "css":1,  "sh":1, "bash":1 }
 
 "-- [ALE] ------------------------------------------------------------------
 
 "   Enable ALE linters for certain filetypes
-let g:ale_linters = { 'c':'all', 'cpp':'all', 'javascript':'all' }
+let g:ale_linters = { 'c':'all', 'cpp':'all', 'python':'all', 'javascript':'all',
+                     \'html':'all', 'css':'all', 'sh':'all', 'awk':'all' }
 
 "   Enable ALE parsing Makefile
 let g:ale_c_parse_makefile = 1
 let g:ale_cpp_parse_makefile = 1
 
-
 "-- [INDENTLINE] ------------------------------------------------------------
 
 "   Change indent character
 let g:indentLine_char = '▏'
-
 
 "-- [VIM-DEVICONS] ----------------------------------------------------------
 
@@ -147,5 +145,22 @@ set guifont=Ubuntu\ Nerd\ Font\ 11
 
 " Set font for vim-airline
 let g:airline_powerline_fonts = 1
+
+"-- [vim-cpp-enhanced-highlight] --------------------------------------------
+
+" Highlight class scope
+let g:cpp_class_scope_highlight = 1
+
+" Highlight member variables
+let g:cpp_member_variable_highlight = 1
+
+" Highlight class names in declarations
+let g:cpp_class_decl_highlight = 1
+
+" Highlight POSIX functions
+let g:cpp_posix_standard = 1
+
+" Highlight template functions
+let g:cpp_experimental_template_highlight = 1
 
 "----------------------------------------------------------------------------
