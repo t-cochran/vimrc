@@ -67,6 +67,12 @@ vnoremap <C-r> "hy:%s///g<left><left>
 " Map <F5> to preview markdown files with chromium markdown preview
 noremap <F5> :!chromium "%"<CR>
 
+" Set print options to black and white
+set printoptions+=syntax:n
+
+" Map home key to create a black/white .pdf hardcopy
+map <Home> :hardcopy > code_copy.pdf<CR>
+
 "-- [NERDTREE] ----------------------------------------------------------------
 
 " Run NERDTree when vim starts
@@ -97,13 +103,6 @@ endif
 
 " Nightowl theme
 colorscheme night-owl
-autocmd VimEnter * highlight Number ctermfg=224 guifg=Orange
-autocmd VimEnter * highlight Constant ctermfg=116 guifg=#7fdbca
-autocmd VimEnter * highlight Type ctermfg=176 guifg=#c792ea
-autocmd VimEnter * highlight Boolean ctermfg=176 guifg=#c792ea
-autocmd VimEnter * highlight Function ctermfg=176 guifg=#c792ea
-autocmd VimEnter * highlight Conditional ctermfg=176 guifg=#c792ea
-autocmd VimEnter * highlight Repeat ctermfg=176 guifg=#c792ea
 
 "   Nord theme
 " colorscheme nord
