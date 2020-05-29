@@ -5,7 +5,7 @@
 " :PlugUpdate       - update plugins
 call plug#begin()
 Plug 'preservim/NERDTREE'
-Plug 'arcticicestudio/nord-vim'
+Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'haishanh/night-owl.vim'
 Plug 'vim-airline/vim-airline'
 call plug#end()
@@ -22,7 +22,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'Yggdroot/indentLine'
 Plugin 'dense-analysis/ale'
 Plugin 'Valloric/YouCompleteMe'
@@ -85,7 +84,7 @@ autocmd VimLeave * NERDTreeClose
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Set default NERDTREE width
-:let g:NERDTreeWinSize=30
+let g:NERDTreeWinSize=30
 
 " Toggle NERDTREE with hotkey [Ctrl+n]
 map <C-n> :NERDTreeToggle<CR>
@@ -101,11 +100,9 @@ if (has("termguicolors"))
       set termguicolors
 endif
 
-" Nightowl theme
-colorscheme night-owl
-
-"   Nord theme
-" colorscheme nord
+" Nightfly Theme
+colorscheme nightfly
+let g:indentLine_setColors = 0
 
 "-- [YOUCOMPLETEME] ---------------------------------------------------------
 
